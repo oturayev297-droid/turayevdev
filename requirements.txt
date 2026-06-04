@@ -2,5 +2,5 @@ Django==5.0.6
 gunicorn
 google-genai==2.0.1
 python-dotenv
-psycopg2-binary
+psycopg[binary]
 Pillow

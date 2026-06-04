@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- Gentle Magnetic Hover ---
-    const magnets = document.querySelectorAll('.btn, .hover-lift');
+    const magnets = document.querySelectorAll('.hover-lift');
     if (!isTouchDevice) {
         magnets.forEach(mag => {
             mag.addEventListener('mousemove', (e) => {

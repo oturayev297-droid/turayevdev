@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from portal.views import ai_chat_handler
 
 urlpatterns = [
-    path('ai-chat/', ai_chat_handler, name='ai_chat_root'),
+    path('ai-chat/', ai_chat_handler, name='ai_chat'),
 ]
 
 urlpatterns += i18n_patterns(

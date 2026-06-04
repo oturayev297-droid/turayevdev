@@ -14,7 +14,10 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     category = models.CharField(max_length=100, default="Veb Loyiha")
     description = models.TextField()
-    tech_stack = models.CharField(max_length=300, help_text="Vergul bilan ajratib yozing: Django, JS, Redis")
+    tech_stack = models.CharField(
+        max_length=300, 
+        help_text="Vergul bilan ajratib yozing: Django, JS, Redis"
+    )
     image = models.ImageField(upload_to='projects/', blank=True, null=True)
     link = models.URLField(default="#")
     
@@ -23,9 +26,14 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+
 class ContactMessage(models.Model):
     full_name = models.CharField(max_length=200)
-    email = models.EmailField()
+    telegram = models.CharField(
+        max_length=200, 
+        verbose_name="Telegram URL yoki Username"
+    )
     subject = models.CharField(max_length=255)
     message = models.TextField()
     is_read = models.BooleanField(default=False)
@@ -33,6 +41,7 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"From {self.full_name} - {self.subject}"
+
 
 class AIOrder(models.Model):
     client_name = models.CharField(max_length=200, verbose_name="Mijoz Ismi")

@@ -7,8 +7,8 @@ class GeminiAssistant:
         api_key = getattr(settings, 'GEMINI_API_KEY', '')
         if api_key:
             self.client = genai.Client(api_key=api_key)
-            # Targeting 2.5-flash which is available in this 2026 environment
-            self.model_name = "gemini-2.5-flash"
+            # Using models/gemini-2.5-flash as verified by test script
+            self.model_name = "models/gemini-2.5-flash"
         else:
             self.client = None
 
@@ -22,9 +22,9 @@ class GeminiAssistant:
         1. Mijozlar bilan xushmuomala Ozodbek nomidan gaplashish.
         2. Ularning loyiha g'oyalari bo'yicha maslahat berish (siz kabi aqllisiz, IT bo'yicha barcha savollarga javob bering).
         3. Standart narxlar haqida ma'lumot berish:
-           - Landing Page: 500$ - 1500$
-           - E-commerce: 2000$ - 5000$
-           - Mobile App: 3000$+
+           - 1 Sahifali Veb-sayt: 500$ dan boshlanadi
+           - Kattaroq Sayt yoki Ilovalar: 1000$ - 10000$
+           - Telegram Botlar: 500$ - 5000$+
         4. Agar mijoz loyiha zakaz qilmoqchi bo'lsa, uning ismi va loyiha haqida qisqacha ma'lumotni oling.
         
         MUHIM: Suhbat yakunida mijoz ismi va loyiha haqida aniq ma'lumotga ega bo'lsangiz, xabar oxirida manavi maxsus formatda LEAD ma'lumotlarini qoldiring:
@@ -61,4 +61,7 @@ class GeminiAssistant:
             finalized = "###LEAD_DATA=" in text
             return text, finalized
         except Exception as e:
-            return f"Xatolik yuz berdi: {str(e)}", False
+            error_msg = str(e)
+            if "429" in error_msg or "RESOURCE_EXHAUSTED" in error_msg:
+                return "Kechirasiz, AI kvotasi tugagan. Iltimos, keyinroq urinib ko'ring yoki boshqa API key foydalaning.", False
+            return f"Xatolik yuz berdi: {error_msg}", False

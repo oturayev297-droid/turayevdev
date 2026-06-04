@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
     
     <!-- Core Styles -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=3.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=5.0">
 </head>
 <body>
 
@@ -50,7 +50,9 @@
                 </div>
             </nav>
             <button class="menu-btn" id="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </button>
         </div>
     </header>
@@ -78,74 +80,66 @@
         <div id="smooth-content">
             {% block content %}{% endblock %}
             
-            <footer class="site-footer">
-                <div class="footer-top">
-                    <div class="footer-brand">
-                        <div class="logo">
-                            <span>&lt;/</span> DEV.<span>MASTER &gt;</span>
-                        </div>
+            <!-- AI Assistant -->
+            {% include 'ai_chat.html' %}
+            
+            <footer class="pf-footer">
+                <div class="pf-footer-inner">
+                    <!-- Brand col -->
+                    <div class="pf-brand">
+                        <a href="#" class="pf-logo">Tura<span>Yev.Web</span></a>
                         <p>{% trans "Zamonaviy veb-texnologiyalar orqali biznesingizni yangi bosqichga olib chiqamiz." %}</p>
+                        <!-- <div class="pf-social">
+                            <a href="https://t.me/Turayevvv_Web" target="_blank"><i class="fab fa-telegram"></i></a>
+                            <a href="https://instagram.com/turayevvv_004" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://github.com/oturayev297-droid" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        </div> -->
                     </div>
-                    <div class="footer-links">
-                        <h4>{% trans "Bo'limlar" %}</h4>
+
+                    <!-- Nav col 1 -->
+                    <div class="pf-links-col">
+                        <h5>{% trans "Bo'limlar" %}</h5>
                         <a href="#home">{% trans "Asosiy" %}</a>
                         <a href="#about">{% trans "Haqimda" %}</a>
                         <a href="#services">{% trans "Xizmatlar" %}</a>
+                        <a href="#experience">{% trans "Tajriba" %}</a>
                         <a href="#projects">{% trans "Loyihalar" %}</a>
+                        <a href="#contact">{% trans "Aloqa" %}</a>
                     </div>
-                    <div class="footer-links">
-                        <h4>{% trans "Xizmatlar" %}</h4>
+
+                    <!-- Nav col 2 -->
+                    <div class="pf-links-col">
+                        <h5>{% trans "Xizmatlar" %}</h5>
                         <a href="#">Web Design</a>
-                        <a href="#">Full-stack Development</a>
+                        <a href="#">Full-stack Dev</a>
                         <a href="#">Telegram Bots</a>
+                        <a href="#">iOS / Android</a>
                         <a href="#">UI/UX Design</a>
+                        <a href="#">Mentorlik</a>
                     </div>
-                    <div class="footer-social">
-                        <h4>{% trans "Ijtimoiy Tarmoqlar" %}</h4>
-                        <div class="social-row">
-                            <a href="https://github.com/USERNAME" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="https://linkedin.com/in/USERNAME" target="_blank"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://t.me/Turayevvv_Web" target="_blank"><i class="fab fa-telegram"></i></a>
-                            <a href="https://www.instagram.com/turayevvv_004?igsh=MWF4bm5leW9pYnN6Mg==" target="_blank"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-    <!-- AI Assistant -->
-    {% include 'ai_chat.html' %}
 
-    <footer class="footer">
-        <div class="container footer-minimal">
-            <div class="footer-center-content">
-                <a href="#" class="logo footer-logo">OZOD<span>BEK</span></a>
-                <p class="footer-bio">{% trans "Buxoroning qadimiy ruhi va zamonaviy texnologiyalar uyg'unligi. Kelajakni hozirdanoq birgalikda quramiz." %}</p>
-                
-                <div class="footer-cta-row">
-                    <button class="ai-pill-btn" onclick="document.getElementById('ai-trigger').click()">
-                        <i class="fas fa-bolt"></i> {% trans "AI Assistant" %}
-                    </button>
-                    <div class="social-pills">
-                        <a href="#" class="spill"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="spill"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="spill"><i class="fab fa-github"></i></a>
+                    <!-- Contact col -->
+                    <div class="pf-links-col">
+                        <h5>{% trans "Aloqa" %}</h5>
+                        <a href="mailto:ozodbek@info.uz"><i class="fas fa-envelope"></i> ozodbek@info.uz</a>
+                        <a href="https://t.me/Turayevvv_Web" target="_blank"><i class="fab fa-telegram"></i> @Turayevvv_Web</a>
+                        <a href="#"><i class="fas fa-location-dot"></i> Toshkent / Samarqand / Buxoro</a>
                     </div>
                 </div>
 
-                <div class="footer-nav-simple">
-                    <a href="#about">{% trans "Haqida" %}</a>
-                    <a href="#projects">{% trans "Loyihalar" %}</a>
-                    <a href="#contact">{% trans "Bog'lanish" %}</a>
+                <!-- Bottom bar -->
+                <div class="pf-footer-bottom">
+                    <p>&copy; 2026 <span>Ozodbek Turayev</span>. {% trans "Barcha huquqlar himoyalangan." %}</p>
+                    <p>{% trans "Python · Django · JavaScript" %}</p>
                 </div>
-
-                <div class="footer-copyright">
-                    &copy; 2026 Ozodbek Turayev. {% trans "Barcha huquqlar himoyalangan." %}
-                </div>
-            </div>
-        </div>
-    </footer>
+            </footer>
+        </div> <!-- #smooth-content -->
+    </main> <!-- #smooth-wrapper -->
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="{% static 'js/main.js' %}?v=1.1"></script>
+    <script src="{% static 'js/main.js' %}?v=2.0"></script>
 </body>
 </html>

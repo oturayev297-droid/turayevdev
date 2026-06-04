@@ -3,7 +3,8 @@ import django
 import sys
 
 # Add project root to path
-sys.path.append('c:/Users/user/Desktop/portfolio')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(current_dir)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
@@ -18,49 +19,37 @@ def seed_projects():
             "title": "Upgrade Tech Store",
             "category": "E-Commerce",
             "description": "Yuqori unumdorlikka ega kompyuter va gaming jihozlari uchun ixtisoslashgan onlayn do'kon.",
-            "image": "Снимок экрана 2026-02-12 093740.png"
+            "image": "projects/upgrade_tech_store.png"
         },
         {
             "title": "Anor Travel",
             "category": "Tourism",
             "description": "O'zbekiston va Markaziy Osiyo bo'ylab premium turistik xizmatlar ko'rsatish platformasi.",
-            "image": "Снимок экрана 2026-02-12 095756.png"
+            "image": "projects/anor_travel.png"
         },
         {
             "title": "IT Academy Catalog",
             "category": "Ed-Tech",
             "description": "Professional dasturlash kurslarini boshqaruvchi va sotuvchi murakkab LMS tizimi.",
-            "image": "Снимок экрана 2026-02-12 094807.png"
+            "image": "projects/it_academy_catalog.png"
         },
         {
             "title": "Restaurantly",
             "category": "Gastronomy",
             "description": "Hashamatli restoranlar uchun onlayn menyu va stol band qilish (booking) tizimi.",
-            "image": "Снимок экрана 2026-02-12 093047.png"
+            "image": "projects/restaurantly.png"
         },
         {
             "title": "HomeSpace",
             "category": "Real Estate",
             "description": "Ko'chmas mulkni ijaraga berish va sotish bo'yicha zamonaviy qidiruv portali.",
-            "image": "Снимок экрана 2026-02-12 093614.png"
+            "image": "projects/homespace.png"
         },
         {
             "title": "Learner Platform",
             "category": "Education",
             "description": "Onlayn kurslar va masofaviy ta'limni tashkil etuvchi zamonaviy veb-platforma.",
-            "image": "Снимок экрана 2026-02-12 093401.png"
-        },
-        {
-            "title": "Durdona Ceremony",
-            "category": "Events",
-            "description": "Tantanalar saroyi va premium restoranlar uchun mo'ljallangan bron qilish sayti.",
-            "image": "Снимок экрана 2026-02-12 095022.png"
-        },
-        {
-            "title": "MultiShop Store",
-            "category": "Retail",
-            "description": "Turli xildagi tovarlar savdosi uchun mo'ljallangan universal e-commerce yechimi.",
-            "image": "Снимок экрана 2026-02-12 100105.png"
+            "image": "projects/learner_platform.png"
         }
     ]
     
@@ -69,7 +58,7 @@ def seed_projects():
             title=p['title'],
             category=p['category'],
             description=p['description'],
-            image_path=f"image/{p['image']}",
+            image=p['image'],
             tech_stack="Django, Python, CSS3, GSAP",
             link="#"
         )
