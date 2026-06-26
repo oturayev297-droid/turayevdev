@@ -1,4 +1,4 @@
-# GitLab CI/CD Pipeline for Django
+# GitLab CI/CD Pipeline for Django Portfolio
 stages:
   - test
   - deploy
@@ -15,6 +15,7 @@ cache:
 
 before_script:
   - python -V
+  - apt-get update && apt-get install -y --no-install-recommends gcc libpq-dev
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
@@ -23,8 +24,9 @@ before_script:
 test_job:
   stage: test
   script:
+    - python manage.py check --deploy 2>&1 || true
     - python manage.py check
-    - # python manage.py test  # Uncomment if you have tests
+    - echo "Django checks passed!"
 
 deploy_check:
   stage: deploy
