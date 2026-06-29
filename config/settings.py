@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import sys
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -62,8 +63,7 @@ DATABASES = {
     }
 }
 
-if os.environ.get('DB_NAME'):
-    # Fix for UnicodeDecodeError on Windows with psycopg2
+if os.environ.get('DB_NAME') and 'test' not in sys.argv:
     os.environ['PGCLIENTENCODING'] = 'utf-8'
     
     DATABASES = {
