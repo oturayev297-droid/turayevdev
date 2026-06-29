@@ -62,7 +62,6 @@ DATABASES = {
     }
 }
 
-"""
 if os.environ.get('DB_NAME'):
     # Fix for UnicodeDecodeError on Windows with psycopg2
     os.environ['PGCLIENTENCODING'] = 'utf-8'
@@ -84,7 +83,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-"""
+
 
 from django.utils.translation import gettext_lazy as _
 

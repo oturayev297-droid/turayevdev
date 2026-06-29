@@ -1,5 +1,6 @@
 import json
 import re
+import threading
 import requests
 from django.shortcuts import render
 from django.conf import settings
@@ -8,6 +9,22 @@ from django.views.decorators.http import require_POST
 from .models import Experience, Project, AIOrder
 from .forms import ContactForm
 from .ai_service import GeminiAssistant
+
+
+def send_telegram_async(bot_token, chat_id, text, parse_mode='HTML'):
+    """Sends a Telegram message asynchronously in a background thread with a timeout."""
+    def _send():
+        url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+        try:
+            requests.post(url, data={
+                'chat_id': chat_id,
+                'text': text,
+                'parse_mode': parse_mode
+            }, timeout=5)
+        except requests.RequestException:
+            pass
+
+    threading.Thread(target=_send, daemon=True).start()
 
 
 def home(request):
@@ -47,16 +64,7 @@ def contact_view(request):
                 f"📝 <b>Mavzu:</b> {msg.subject}\n\n"
                 f"💬 <b>Xabar:</b>\n{msg.message}"
             )
-            url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-            try:
-                # Use HTML parse_mode for resilience
-                requests.post(url, data={
-                    'chat_id': chat_id, 
-                    'text': text, 
-                    'parse_mode': 'HTML'
-                })
-            except Exception:
-                pass
+            send_telegram_async(bot_token, chat_id, text, parse_mode='HTML')
                 
         return JsonResponse({
             'status': 'success', 
@@ -112,15 +120,7 @@ def ai_chat_handler(request):
                             f"📁 *Loyiha:* {order.project_brief}\n\n"
                             f"🤖 _Gemini AI orqali suhbat yakunlandi._"
                         )
-                        url = (
-                            f"https://api.telegram.org/bot{bot_token}"
-                            f"/sendMessage"
-                        )
-                        requests.post(url, data={
-                            'chat_id': chat_id, 
-                            'text': text, 
-                            'parse_mode': 'Markdown'
-                        })
+                        send_telegram_async(bot_token, chat_id, text, parse_mode='Markdown')
                 except Exception:
                     pass
 
@@ -130,4 +130,5 @@ def ai_chat_handler(request):
             'response': f"Texnik xato: {str(gl_e)}", 
             'finalized': False
         }, status=500)
+
 
